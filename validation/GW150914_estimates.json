@@ -1,0 +1,44 @@
+{
+  "event": "GW150914",
+  "detectors": [
+    "H1",
+    "L1"
+  ],
+  "waveform_fallback_used": false,
+  "frame": "detector",
+  "recovered": {
+    "network_snr": 23.6136,
+    "single_detector_snr": {
+      "H1": 19.5267,
+      "L1": 13.2782
+    },
+    "chirp_mass_detector_msun": 31.92637,
+    "mass_ratio_q": 1.0,
+    "template_index": 11,
+    "template_masses_msun": [
+      36.6738,
+      36.6738
+    ],
+    "merger_gps_time": {
+      "H1": 1126259462.427832,
+      "L1": 1126259462.420996
+    },
+    "merger_gps_reference": 1126259462.420996,
+    "first_arrival_detector": "L1",
+    "inter_detector_delay_ms": -6.8359,
+    "template_total_mass_detector_msun": 73.3475,
+    "template_f_isco_hz": 59.95,
+    "chirp_mass_source_msun_using_published_z": 29.29025,
+    "published_redshift_used": 0.09,
+    "source_frame_caveat": "Derived with the PUBLISHED redshift, not a measured one (SPEC.md N8). Not an independent measurement."
+  },
+  "not_reported": {
+    "false_alarm_rate": "SPEC.md N1 -- not computable from one segment",
+    "significance_sigma": "SPEC.md N1",
+    "credible_intervals": "SPEC.md N3 -- point estimate, not a posterior",
+    "component_masses": "SPEC.md N4 -- requires full parameter estimation",
+    "spins_distance_sky": "SPEC.md N5-N7"
+  },
+  "status": "ok",
+  "n_candidates": 1
+}

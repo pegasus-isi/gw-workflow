@@ -1,0 +1,213 @@
+{
+  "generated_utc": "2026-08-23T02:29:43Z",
+  "verdict": "PASS",
+  "n_events_validated": 7,
+  "n_controls": 6,
+  "controls_skipped": false,
+  "waveform_fallback_used": false,
+  "control_failures": [],
+  "tier_a_hard_failures": [],
+  "tier_a_other_failures": [],
+  "tier_b_notes": [],
+  "bank": {
+    "n_templates": 3858,
+    "chirp_mass_detector_range": [
+      5.0,
+      59.94094156401742
+    ],
+    "approximant": "IMRPhenomD",
+    "minimal_match_requested": 0.97,
+    "minimal_match_measured_min": 0.96805,
+    "waveform_fallback_used": false,
+    "truncated": false
+  },
+  "bank_adequacy_pass": true,
+  "events": [
+    {
+      "event": "GW150914",
+      "tier": "A",
+      "verdict": "PASS",
+      "failures": [],
+      "recovered": {
+        "V1a": 23.6942,
+        "V1b": 23.6942,
+        "V1c": {
+          "H1": 19.5476,
+          "L1": 13.3905
+        },
+        "V2a/V2b": 31.57544,
+        "V2c": 31.57544,
+        "V2d": 0.00436,
+        "V3a": 21.0,
+        "V3b": 7.324,
+        "V3c": {
+          "first_arrival": "L1",
+          "delay_ms": 7.324
+        }
+      }
+    },
+    {
+      "event": "GW151226",
+      "tier": "A",
+      "verdict": "PASS",
+      "failures": [],
+      "recovered": {
+        "V1a": 12.2649,
+        "V1b": 12.2649,
+        "V1c": {
+          "H1": 9.8818,
+          "L1": 7.2649
+        },
+        "V2a/V2b": 9.47313,
+        "V2c": 9.47313,
+        "V2d": 0.00017,
+        "V3a": 47.36,
+        "V3b": 1.074
+      }
+    },
+    {
+      "event": "GW170104",
+      "tier": "A",
+      "verdict": "PASS",
+      "failures": [],
+      "recovered": {
+        "V1a": 13.5263,
+        "V1b": 13.5263,
+        "V1c": {
+          "H1": 9.2939,
+          "L1": 9.8277
+        },
+        "V2a/V2b": 26.0222,
+        "V2c": 26.0222,
+        "V2d": 0.00183,
+        "V3a": 2.44,
+        "V3b": 2.93
+      }
+    },
+    {
+      "event": "GW170608",
+      "tier": "A",
+      "verdict": "PASS",
+      "failures": [],
+      "recovered": {
+        "V1a": 19.1436,
+        "V1b": 19.1436,
+        "V1c": {
+          "H1": 17.5831,
+          "L1": 7.5704
+        },
+        "V2a/V2b": 8.15802,
+        "V2c": 8.15802,
+        "V2d": 0.00013,
+        "V3a": 18.07,
+        "V3b": 6.836
+      }
+    },
+    {
+      "event": "GW170809",
+      "tier": "A",
+      "verdict": "PASS",
+      "failures": [],
+      "recovered": {
+        "V1a": 12.4562,
+        "V1b": 12.4562,
+        "V1c": {
+          "H1": 6.3657,
+          "L1": 10.7068
+        },
+        "V2a/V2b": 29.44581,
+        "V2c": 29.44581,
+        "V2d": 0.00048,
+        "V3a": 54.69,
+        "V3b": 8.789
+      }
+    },
+    {
+      "event": "GW170814",
+      "tier": "A",
+      "verdict": "PASS",
+      "failures": [],
+      "recovered": {
+        "V1a": 16.9908,
+        "V1b": 16.9908,
+        "V1c": {
+          "H1": 9.363,
+          "L1": 14.1782
+        },
+        "V2a/V2b": 26.2131,
+        "V2c": 26.2131,
+        "V2d": 0.00121,
+        "V3a": 26.85,
+        "V3b": 7.812
+      }
+    },
+    {
+      "event": "GW170823",
+      "tier": "A",
+      "verdict": "PASS",
+      "failures": [],
+      "recovered": {
+        "V1a": 11.5105,
+        "V1b": 11.5105,
+        "V1c": {
+          "H1": 6.3648,
+          "L1": 9.5907
+        },
+        "V2a/V2b": 38.92656,
+        "V2c": 38.92656,
+        "V2d": 0.00893,
+        "V3a": 16.11,
+        "V3b": 0.977
+      }
+    }
+  ],
+  "controls": [
+    {
+      "file": "control_offsource.json",
+      "control": "offsource_null",
+      "criterion": "V5a",
+      "pass": true,
+      "failure_reason": null
+    },
+    {
+      "file": "control_injection_00.json",
+      "control": "injection_recovery",
+      "criterion": "V5b",
+      "pass": true,
+      "failure_reason": null
+    },
+    {
+      "file": "control_injection_01.json",
+      "control": "injection_recovery",
+      "criterion": "V5b",
+      "pass": true,
+      "failure_reason": null
+    },
+    {
+      "file": "control_injection_02.json",
+      "control": "injection_recovery",
+      "criterion": "V5b",
+      "pass": true,
+      "failure_reason": null
+    },
+    {
+      "file": "control_injection_03.json",
+      "control": "injection_recovery",
+      "criterion": "V5b",
+      "pass": true,
+      "failure_reason": null
+    },
+    {
+      "file": "control_injection_04.json",
+      "control": "injection_recovery",
+      "criterion": "V5b",
+      "pass": true,
+      "failure_reason": null
+    }
+  ],
+  "not_established": [
+    "false alarm rate / significance (SPEC.md N1)",
+    "credible intervals (SPEC.md N3)",
+    "component masses, spins, distance, sky position (SPEC.md N4-N7)"
+  ]
+}

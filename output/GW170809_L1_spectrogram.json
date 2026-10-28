@@ -1,0 +1,16 @@
+{
+  "event": "GW170809",
+  "detector": "L1",
+  "png": "GW170809_L1_spectrogram.png",
+  "q": 12.0,
+  "band_hz": [
+    20.0,
+    512.0
+  ],
+  "half_width_s": 1.0,
+  "peak_normalised_energy": 17.99,
+  "peak_frequency_hz": 50.38,
+  "peak_time_from_event_s": -0.105,
+  "blocking": false,
+  "note": "SPEC.md V4a/V4b are non-blocking; absence of a visible chirp is not a failure. GWTC-1 Fig. 10 shows several events with no visible track."
+}

@@ -1,0 +1,35 @@
+{
+  "control": "injection_recovery",
+  "criterion": "V5b",
+  "hard_gate": true,
+  "event_context": "GW150914",
+  "detector": "H1",
+  "span": "offsource/span_04",
+  "crop_length_s": 64.0,
+  "crop_note": "shorter than the on-source segment; segment length does not affect chirp-mass or time recovery, and this keeps a full-bank search inside the job budget",
+  "injected": {
+    "chirp_mass_detector_msun": 38.0,
+    "q": 1.2,
+    "mass1": 47.8565,
+    "mass2": 39.8804,
+    "optimal_snr": 15.0,
+    "gps_time": 1126258583.0
+  },
+  "tolerances": {
+    "chirp_mass_fractional": 0.1,
+    "time_ms": 100.0
+  },
+  "waveform_fallback_used": false,
+  "n_triggers": 49,
+  "recovered": {
+    "chirp_mass_detector_msun": 38.95469,
+    "q": 1.0,
+    "snr": 16.787,
+    "gps_time": 1126258583.0,
+    "chirp_mass_fractional_error": 0.02512,
+    "time_error_ms": 0.0,
+    "chirp_mass_within_tolerance": true,
+    "time_within_tolerance": true
+  },
+  "pass": true
+}

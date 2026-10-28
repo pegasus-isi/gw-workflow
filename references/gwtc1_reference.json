@@ -1,0 +1,1852 @@
+{
+  "schema_version": "1.0",
+  "generated_from": "the four PDFs in references/; all values transcribed from the published tables and text",
+  "conventions": {
+    "credible_interval": "90% symmetric; {median, plus, minus} unless a {bound, value} object is given",
+    "masses": "source frame; multiply by (1+z) for detector frame",
+    "notes": "GWTC-1 values supersede the individual detection papers. A null FAR/SNR means that pipeline did not report the event."
+  },
+  "sources": [
+    {
+      "key": "GW150914",
+      "citation": "B. P. Abbott et al. (LIGO/Virgo), Phys. Rev. Lett. 116, 061102 (2016)",
+      "title": "Observation of Gravitational Waves from a Binary Black Hole Merger",
+      "doi": "10.1103/PhysRevLett.116.061102",
+      "file": "PhysRevLett.116.061102.pdf"
+    },
+    {
+      "key": "PyCBC",
+      "citation": "S. A. Usman et al., Class. Quantum Grav. 33, 215004 (2016)",
+      "title": "The PyCBC search for gravitational waves from compact binary coalescence",
+      "doi": "10.1088/0264-9381/33/21/215004",
+      "file": "Usman_2016_Class._Quantum_Grav._33_215004.pdf"
+    },
+    {
+      "key": "GWTC-1",
+      "citation": "B. P. Abbott et al. (LIGO/Virgo), Phys. Rev. X 9, 031040 (2019)",
+      "title": "GWTC-1: A Gravitational-Wave Transient Catalog of Compact Binary Mergers Observed by LIGO and Virgo during the First and Second Observing Runs",
+      "doi": "10.1103/PhysRevX.9.031040",
+      "file": "PhysRevX.9.031040.pdf"
+    },
+    {
+      "key": "GWOSC",
+      "citation": "R. Abbott et al. (LIGO/Virgo), SoftwareX 13, 100658 (2021)",
+      "title": "Open data from the first and second observing runs of Advanced LIGO and Advanced Virgo",
+      "doi": "10.1016/j.softx.2021.100658",
+      "file": "1-s2.0-S2352711021000030-main.pdf"
+    }
+  ],
+  "observing_runs": {
+    "O1": {
+      "start": "2015-09-12",
+      "end": "2016-01-19",
+      "duty_factor_pct": {
+        "H1": 64.6,
+        "L1": 57.4
+      },
+      "network_duty_factor_pct": 42.8,
+      "detections": 3
+    },
+    "O2": {
+      "start": "2016-11-30",
+      "end": "2017-08-25",
+      "virgo_joined": "2017-08-01",
+      "duty_factor_pct": {
+        "H1": 65.3,
+        "L1": 61.8,
+        "V1": 85.1
+      },
+      "network_duty_factor_pct": 46.1,
+      "ligo_virgo_network_duty_factor_pct": 35.0,
+      "coincident_analysis_days": 118,
+      "coincident_with_virgo_days": 15,
+      "detections": 8
+    },
+    "O3": {
+      "start": "2019-04-01",
+      "note": "not covered by these papers"
+    }
+  },
+  "cosmology": {
+    "model": "flat LCDM",
+    "H0_km_s_Mpc": 67.9,
+    "Omega_m": 0.306,
+    "source": "GWTC-1 Appendix B",
+    "sensitivity_note": "switching to Planck 2018 changes z by <0.3% and source-frame total mass by <0.03%"
+  },
+  "open_data": {
+    "portal": "https://gw-openscience.org",
+    "native_sample_rate_hz": {
+      "LIGO": 16384,
+      "Virgo": 20000,
+      "virgo_resampled_to": 16384
+    },
+    "gwosc_sample_rates_hz": [
+      16384,
+      4096
+    ],
+    "downsampling": "scipy.signal.decimate, order-8 Chebyshev type I IIR anti-alias filter",
+    "usable_band_hz": {
+      "4096_hz_data_valid_to": 1700,
+      "calibrated_band_LIGO": [
+        10,
+        5000
+      ],
+      "calibrated_band_Virgo": [
+        10,
+        8000
+      ],
+      "highpass_hz": 8
+    },
+    "file_durations_s": {
+      "bulk": 4096,
+      "event_snippets": [
+        32,
+        4096
+      ]
+    },
+    "formats": [
+      "hdf5",
+      "gwf",
+      "ascii (GPS, strain)"
+    ],
+    "channels": {
+      "O1_H1": "H1:DCS-CALIB_STRAIN_C02",
+      "O1_L1": "L1:DCS-CALIB_STRAIN_C02",
+      "O2_H1": "H1:DCH-CLEAN_STRAIN_C02",
+      "O2_L1": "L1:DCH-CLEAN_STRAIN_C02",
+      "O2_V1": "V1:Hrec_hoft_V1O2Repro2A_16384Hz"
+    },
+    "modifications_by_gwosc": [
+      "downsampling to 4096 Hz",
+      "NaN substitution for bad or absent data"
+    ],
+    "dq_bitmask_rate_hz": 1,
+    "dq_bits": {
+      "0": "DATA",
+      "1": "CBC_CAT1",
+      "2": "CBC_CAT2",
+      "3": "CBC_CAT3",
+      "4": "BURST_CAT1",
+      "5": "BURST_CAT2",
+      "6": "BURST_CAT3"
+    },
+    "injection_bits": {
+      "0": "NO_CBC_HW_INJ",
+      "1": "NO_BURST_HW_INJ",
+      "2": "NO_DETCHAR_HW_INJ",
+      "3": "NO_CW_HW_INJ",
+      "4": "NO_STOCH_HW_INJ"
+    },
+    "dead_time_pct": {
+      "CAT1": {
+        "O1": {
+          "H1": 1.683,
+          "L1": 1.039
+        },
+        "O2": {
+          "H1": 0.001,
+          "L1": 0.003,
+          "V1": 0.053
+        }
+      },
+      "CBC_CAT2": {
+        "O1": {
+          "H1": 0.89,
+          "L1": 0.007
+        },
+        "O2": {
+          "H1": 0.157,
+          "L1": 0.09
+        }
+      },
+      "BURST_CAT2": {
+        "O1": {
+          "H1": 0.624,
+          "L1": 0.021
+        },
+        "O2": {
+          "H1": 0.212,
+          "L1": 0.151
+        },
+        "note": "CAT2 was not used for Virgo in O2"
+      }
+    },
+    "caveats": [
+      "CAT1 failures are NaN in the strain array; cascading categories",
+      "CAT3 unused in O1/O2 but retained in the file format",
+      "passing all DQ flags does not imply the data is free of transient artifacts",
+      "Virgo performed no hardware injections in O2, so all injection bits are 1"
+    ]
+  },
+  "pipeline_config": {
+    "pycbc_paper": {
+      "sample_interval_s": 0.000244140625,
+      "sample_rate_hz": 4096,
+      "fft_block_s": 256,
+      "fft_points": 1048576,
+      "psd_estimation_block_s": 16,
+      "psd_input_length_s": 2048,
+      "psd_averages": 127,
+      "inverse_psd_truncation_s": 16,
+      "bank_psd": "harmonic mean of 2048 s median estimates, averaged over time and detectors",
+      "bank_max_snr_loss_pct": 3,
+      "gating": {
+        "window": "Tukey",
+        "alpha": 0.5,
+        "zeroed_duration_s": 1,
+        "glitch_trigger_skirt_s": 8,
+        "identification": "whiten in frequency domain, inverse FFT, threshold |whitened strain|, cluster peaks"
+      },
+      "clustering": {
+        "window_s": 1,
+        "method": "per-window max then local-maximum check against neighbours"
+      },
+      "chi_squared": {
+        "statistic": "chi2 over p equal-power frequency bins",
+        "reduced": "chi2/(2p-2)",
+        "reweighted_snr": "rho / {[1+(chi2_r)^3]/2}^(1/6) for chi2_r > 1, else rho",
+        "p_varies_with_template": true,
+        "fft_crossover_points": "N_p ~ (5/7) p log N ~ 100 for N=2^20"
+      },
+      "coincidence": {
+        "time_window_ms": 15,
+        "light_travel_ms": 10,
+        "timing_pad_ms": 5,
+        "template_match": "exact (same masses and spins)",
+        "ranking": "quadrature sum of reweighted SNR"
+      },
+      "significance": {
+        "time_shift_interval_s": 0.1,
+        "background_time": "T^2/delta",
+        "final_coincident_clustering_s": 10,
+        "search_classes": 3,
+        "class_split": "template length",
+        "trials_factor": "number of classes",
+        "reference": "~15 days coincident data -> FAR ~1 in 2e5 yr (~5 sigma)"
+      },
+      "reweighted_snr_threshold_example": 5.5
+    },
+    "gw150914_prl": {
+      "analysis_days": 16,
+      "analysis_window": "2015-09-12 to 2015-10-20",
+      "templates": 250000,
+      "component_mass_range_msun": [
+        1,
+        99
+      ],
+      "total_mass_max_msun": 100,
+      "max_spin": 0.99,
+      "background_time_yr_cbc": 608000,
+      "time_shifts": 10000000.0,
+      "background_time_yr_burst": 67400,
+      "burst_statistic": "eta_c = sqrt(2 Ec / (1 + En/Ec))",
+      "burst_classes": [
+        "C1 known noise morphology",
+        "C2 remainder",
+        "C3 rising frequency"
+      ],
+      "calibration_uncertainty": {
+        "amplitude_pct": 10,
+        "phase_deg": 10
+      },
+      "gps_timing_accuracy_us": 10
+    },
+    "gwtc1": {
+      "min_coincident_days_per_analysis_period": 5.2,
+      "time_shifts": "within a single analysis period only",
+      "inclusion_far_threshold": "1 per 30 days (12.2/yr) in at least one matched-filter search",
+      "gw_designation_threshold": "p_astro > 0.5 in either matched-filter search",
+      "p_astro_model": "Poisson mixture over 4 categories: terrestrial, BNS, NSBH, BBH",
+      "pycbc": {
+        "snr_threshold": 5.5,
+        "total_mass_msun": [
+          2,
+          500
+        ],
+        "min_mass_ratio": "1/98",
+        "max_spin": {
+          "below_2_msun": 0.05,
+          "else": 0.998
+        },
+        "min_waveform_duration_s": 0.15,
+        "waveforms": {
+          "above_4_msun": "SEOBNRv4 ROM",
+          "below": "TaylorF2"
+        },
+        "analyzes_virgo": false
+      },
+      "gstlal": {
+        "snr_threshold": {
+          "LIGO": 4,
+          "Virgo": 3.5
+        },
+        "maximization_window_s": 1,
+        "total_mass_msun": [
+          2,
+          400
+        ],
+        "mass_ratio": [
+          "1/98",
+          1
+        ],
+        "max_spin": {
+          "below_2_msun": 0.05,
+          "else": 0.999
+        },
+        "waveforms": {
+          "chirp_mass_below_1.73": "TaylorF2",
+          "else": "SEOBNRv4 ROM"
+        },
+        "coincidence_window": "light travel time + 5 ms",
+        "ranking": "log likelihood ratio",
+        "analyzes_virgo": true
+      },
+      "cwb": {
+        "max_frequency_hz": 1000,
+        "max_duration_s": "a few",
+        "network_correlation_cut": 0.7,
+        "chirp_cut": true,
+        "analyzes_virgo": false
+      },
+      "parameter_estimation": {
+        "samplers": [
+          "LALInference MCMC",
+          "LALInference nested sampling",
+          "RapidPE"
+        ],
+        "psd": "BayesWave median PSD (cubic spline broadband + Lorentzian lines)",
+        "calibration": "frequency-dependent spline envelopes, marginalized",
+        "flow_hz_default": 20.0,
+        "flow_hz_exceptions": {
+          "GW170817": 23.0,
+          "GW170818": 16.0,
+          "GW170608_H1": 30.0
+        },
+        "spin_reference_frequency_hz": 20.0,
+        "bbh_waveforms": [
+          "IMRPhenomPv2",
+          "SEOBNRv3"
+        ],
+        "bbh_combination": "posteriors averaged over the two models",
+        "bns_waveforms": [
+          "IMRPhenomPv2NRT",
+          "SEOBNRv4NRT",
+          "TaylorF2",
+          "SEOBNRv4T",
+          "TEOBResumS"
+        ]
+      },
+      "calibration_uncertainty_o2_final": {
+        "LLO": {
+          "amplitude_pct": 3.8,
+          "phase_deg": 2.1
+        },
+        "LHO": {
+          "amplitude_pct": 2.6,
+          "phase_deg": 2.4
+        },
+        "Virgo": {
+          "amplitude_pct": 5.1,
+          "phase_deg": 2.3,
+          "timestamp_us": 20
+        },
+        "ligo_timing_uncertainty_us": "<1"
+      },
+      "noise_subtraction_o2": {
+        "LHO_bns_range_gain_pct": 20,
+        "LLO": "negligible (line features only)",
+        "gwosc_paper_equivalent": "up to +30% sensitive volume"
+      },
+      "glitch_classes": [
+        "scattered light",
+        "60-200 Hz nonstationarity",
+        "short-duration transients",
+        "blips"
+      ],
+      "glitch_rates": {
+        "short_duration_transients_per_hour": 1,
+        "blips_per_hour": 1
+      },
+      "gw170817_glitch": "short-duration transient in LLO; gated by matched-filter searches, BayesWave-subtracted for PE, and the reason cWB rejected the event"
+    }
+  },
+  "events": [
+    {
+      "name": "GW150914",
+      "date_utc": "2015-09-14",
+      "time_utc": "09:50:45.4",
+      "source_type": "BBH",
+      "first_reported_in": "individual detection paper",
+      "searches": {
+        "pycbc": {
+          "far": {
+            "value": 1.53e-05,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 23.6
+        },
+        "gstlal": {
+          "far": {
+            "value": 1e-07,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 24.4
+        },
+        "cwb": {
+          "far": {
+            "value": 0.000163,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 25.2
+        }
+      },
+      "p_astro": {
+        "gstlal": {
+          "terrestrial": 0,
+          "bns": 0,
+          "nsbh": 0.0064,
+          "bbh": 0.99,
+          "astrophysical": 1
+        },
+        "pycbc": {
+          "terrestrial": 0,
+          "bbh": 1,
+          "astrophysical": 1
+        },
+        "cwb": {
+          "terrestrial": 0,
+          "bbh": 1
+        }
+      },
+      "pe_flow_hz": {
+        "all": 20.0
+      },
+      "source_parameters": {
+        "m1_source_msun": {
+          "median": 35.6,
+          "plus": 4.7,
+          "minus": 3.1
+        },
+        "m2_source_msun": {
+          "median": 30.6,
+          "plus": 3.0,
+          "minus": 4.4
+        },
+        "chirp_mass_source_msun": {
+          "median": 28.6,
+          "plus": 1.7,
+          "minus": 1.5
+        },
+        "chi_eff": {
+          "median": -0.01,
+          "plus": 0.12,
+          "minus": 0.13
+        },
+        "final_mass_source_msun": {
+          "median": 63.1,
+          "plus": 3.4,
+          "minus": 3.0
+        },
+        "final_spin": {
+          "median": 0.69,
+          "plus": 0.05,
+          "minus": 0.04
+        },
+        "e_rad_msun_c2": {
+          "median": 3.1,
+          "plus": 0.4,
+          "minus": 0.4
+        },
+        "l_peak_1e56_erg_per_s": {
+          "median": 3.6,
+          "plus": 0.4,
+          "minus": 0.4
+        },
+        "luminosity_distance_mpc": {
+          "median": 440,
+          "plus": 150,
+          "minus": 170
+        },
+        "redshift": {
+          "median": 0.09,
+          "plus": 0.03,
+          "minus": 0.03
+        },
+        "sky_area_90pct_deg2": 182
+      }
+    },
+    {
+      "name": "GW151012",
+      "date_utc": "2015-10-12",
+      "time_utc": "09:54:43.4",
+      "source_type": "BBH",
+      "first_reported_in": "individual detection paper",
+      "searches": {
+        "pycbc": {
+          "far": {
+            "value": 0.17,
+            "upper_limit": false,
+            "unit": "1/yr"
+          },
+          "network_snr": 9.5
+        },
+        "gstlal": {
+          "far": {
+            "value": 0.00792,
+            "upper_limit": false,
+            "unit": "1/yr"
+          },
+          "network_snr": 10.0
+        },
+        "cwb": {
+          "far": null,
+          "network_snr": null
+        }
+      },
+      "p_astro": {
+        "gstlal": {
+          "terrestrial": 0.001,
+          "bns": 0,
+          "nsbh": 0.031,
+          "bbh": 0.97,
+          "astrophysical": 1
+        },
+        "pycbc": {
+          "terrestrial": 0.04,
+          "bbh": 0.96,
+          "astrophysical": 0.96
+        },
+        "cwb": null
+      },
+      "pe_flow_hz": {
+        "all": 20.0
+      },
+      "source_parameters": {
+        "m1_source_msun": {
+          "median": 23.2,
+          "plus": 14.9,
+          "minus": 5.5
+        },
+        "m2_source_msun": {
+          "median": 13.6,
+          "plus": 4.1,
+          "minus": 4.8
+        },
+        "chirp_mass_source_msun": {
+          "median": 15.2,
+          "plus": 2.1,
+          "minus": 1.2
+        },
+        "chi_eff": {
+          "median": 0.05,
+          "plus": 0.31,
+          "minus": 0.2
+        },
+        "final_mass_source_msun": {
+          "median": 35.6,
+          "plus": 10.8,
+          "minus": 3.8
+        },
+        "final_spin": {
+          "median": 0.67,
+          "plus": 0.13,
+          "minus": 0.11
+        },
+        "e_rad_msun_c2": {
+          "median": 1.6,
+          "plus": 0.6,
+          "minus": 0.5
+        },
+        "l_peak_1e56_erg_per_s": {
+          "median": 3.2,
+          "plus": 0.8,
+          "minus": 1.7
+        },
+        "luminosity_distance_mpc": {
+          "median": 1080,
+          "plus": 550,
+          "minus": 490
+        },
+        "redshift": {
+          "median": 0.21,
+          "plus": 0.09,
+          "minus": 0.09
+        },
+        "sky_area_90pct_deg2": 1523
+      }
+    },
+    {
+      "name": "GW151226",
+      "date_utc": "2015-12-26",
+      "time_utc": "03:38:53.6",
+      "source_type": "BBH",
+      "first_reported_in": "individual detection paper",
+      "searches": {
+        "pycbc": {
+          "far": {
+            "value": 1.69e-05,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 13.1
+        },
+        "gstlal": {
+          "far": {
+            "value": 1e-07,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 13.1
+        },
+        "cwb": {
+          "far": {
+            "value": 0.02,
+            "upper_limit": false,
+            "unit": "1/yr"
+          },
+          "network_snr": 11.9
+        }
+      },
+      "p_astro": {
+        "gstlal": {
+          "terrestrial": 0,
+          "bns": 0,
+          "nsbh": 0.12,
+          "bbh": 0.88,
+          "astrophysical": 1
+        },
+        "pycbc": {
+          "terrestrial": 0,
+          "bbh": 1,
+          "astrophysical": 1
+        },
+        "cwb": {
+          "terrestrial": 0.05,
+          "bbh": 0.95
+        }
+      },
+      "pe_flow_hz": {
+        "all": 20.0
+      },
+      "source_parameters": {
+        "m1_source_msun": {
+          "median": 13.7,
+          "plus": 8.8,
+          "minus": 3.2
+        },
+        "m2_source_msun": {
+          "median": 7.7,
+          "plus": 2.2,
+          "minus": 2.5
+        },
+        "chirp_mass_source_msun": {
+          "median": 8.9,
+          "plus": 0.3,
+          "minus": 0.3
+        },
+        "chi_eff": {
+          "median": 0.18,
+          "plus": 0.2,
+          "minus": 0.12
+        },
+        "final_mass_source_msun": {
+          "median": 20.5,
+          "plus": 6.4,
+          "minus": 1.5
+        },
+        "final_spin": {
+          "median": 0.74,
+          "plus": 0.07,
+          "minus": 0.05
+        },
+        "e_rad_msun_c2": {
+          "median": 1.0,
+          "plus": 0.1,
+          "minus": 0.2
+        },
+        "l_peak_1e56_erg_per_s": {
+          "median": 3.4,
+          "plus": 0.7,
+          "minus": 1.7
+        },
+        "luminosity_distance_mpc": {
+          "median": 450,
+          "plus": 180,
+          "minus": 190
+        },
+        "redshift": {
+          "median": 0.09,
+          "plus": 0.04,
+          "minus": 0.04
+        },
+        "sky_area_90pct_deg2": 1033
+      }
+    },
+    {
+      "name": "GW170104",
+      "date_utc": "2017-01-04",
+      "time_utc": "10:11:58.6",
+      "source_type": "BBH",
+      "first_reported_in": "individual detection paper",
+      "searches": {
+        "pycbc": {
+          "far": {
+            "value": 1.37e-05,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 13.0
+        },
+        "gstlal": {
+          "far": {
+            "value": 1e-07,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 13.0
+        },
+        "cwb": {
+          "far": {
+            "value": 0.000291,
+            "upper_limit": false,
+            "unit": "1/yr"
+          },
+          "network_snr": 13.0
+        }
+      },
+      "p_astro": {
+        "gstlal": {
+          "terrestrial": 0,
+          "bns": 0,
+          "nsbh": 0.0028,
+          "bbh": 1,
+          "astrophysical": 1
+        },
+        "pycbc": {
+          "terrestrial": 0,
+          "bbh": 1,
+          "astrophysical": 1
+        },
+        "cwb": {
+          "terrestrial": 0,
+          "bbh": 1
+        }
+      },
+      "pe_flow_hz": {
+        "all": 20.0
+      },
+      "source_parameters": {
+        "m1_source_msun": {
+          "median": 30.8,
+          "plus": 7.3,
+          "minus": 5.6
+        },
+        "m2_source_msun": {
+          "median": 20.0,
+          "plus": 4.9,
+          "minus": 4.6
+        },
+        "chirp_mass_source_msun": {
+          "median": 21.4,
+          "plus": 2.2,
+          "minus": 1.8
+        },
+        "chi_eff": {
+          "median": -0.04,
+          "plus": 0.17,
+          "minus": 0.21
+        },
+        "final_mass_source_msun": {
+          "median": 48.9,
+          "plus": 5.1,
+          "minus": 4.0
+        },
+        "final_spin": {
+          "median": 0.66,
+          "plus": 0.08,
+          "minus": 0.11
+        },
+        "e_rad_msun_c2": {
+          "median": 2.2,
+          "plus": 0.5,
+          "minus": 0.5
+        },
+        "l_peak_1e56_erg_per_s": {
+          "median": 3.3,
+          "plus": 0.6,
+          "minus": 1.0
+        },
+        "luminosity_distance_mpc": {
+          "median": 990,
+          "plus": 440,
+          "minus": 430
+        },
+        "redshift": {
+          "median": 0.2,
+          "plus": 0.08,
+          "minus": 0.08
+        },
+        "sky_area_90pct_deg2": 921
+      }
+    },
+    {
+      "name": "GW170608",
+      "date_utc": "2017-06-08",
+      "time_utc": "02:01:16.5",
+      "source_type": "BBH",
+      "first_reported_in": "individual detection paper",
+      "searches": {
+        "pycbc": {
+          "far": {
+            "value": 0.000309,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 15.4
+        },
+        "gstlal": {
+          "far": {
+            "value": 1e-07,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 14.9
+        },
+        "cwb": {
+          "far": {
+            "value": 0.000144,
+            "upper_limit": false,
+            "unit": "1/yr"
+          },
+          "network_snr": 14.1
+        }
+      },
+      "p_astro": {
+        "gstlal": {
+          "terrestrial": 0,
+          "bns": 0,
+          "nsbh": 0.084,
+          "bbh": 0.92,
+          "astrophysical": 1
+        },
+        "pycbc": {
+          "terrestrial": 0,
+          "bbh": 1,
+          "astrophysical": 1
+        },
+        "cwb": {
+          "terrestrial": 0,
+          "bbh": 1
+        }
+      },
+      "pe_flow_hz": {
+        "H1": 30.0,
+        "default": 20.0
+      },
+      "source_parameters": {
+        "m1_source_msun": {
+          "median": 11.0,
+          "plus": 5.5,
+          "minus": 1.7
+        },
+        "m2_source_msun": {
+          "median": 7.6,
+          "plus": 1.4,
+          "minus": 2.2
+        },
+        "chirp_mass_source_msun": {
+          "median": 7.9,
+          "plus": 0.2,
+          "minus": 0.2
+        },
+        "chi_eff": {
+          "median": 0.03,
+          "plus": 0.19,
+          "minus": 0.07
+        },
+        "final_mass_source_msun": {
+          "median": 17.8,
+          "plus": 3.4,
+          "minus": 0.7
+        },
+        "final_spin": {
+          "median": 0.69,
+          "plus": 0.04,
+          "minus": 0.04
+        },
+        "e_rad_msun_c2": {
+          "median": 0.9,
+          "plus": 0.0,
+          "minus": 0.1
+        },
+        "l_peak_1e56_erg_per_s": {
+          "median": 3.5,
+          "plus": 0.4,
+          "minus": 1.3
+        },
+        "luminosity_distance_mpc": {
+          "median": 320,
+          "plus": 120,
+          "minus": 110
+        },
+        "redshift": {
+          "median": 0.07,
+          "plus": 0.02,
+          "minus": 0.02
+        },
+        "sky_area_90pct_deg2": 392
+      }
+    },
+    {
+      "name": "GW170729",
+      "date_utc": "2017-07-29",
+      "time_utc": "18:56:29.3",
+      "source_type": "BBH",
+      "first_reported_in": "GWTC-1",
+      "searches": {
+        "pycbc": {
+          "far": {
+            "value": 1.36,
+            "upper_limit": false,
+            "unit": "1/yr"
+          },
+          "network_snr": 9.8
+        },
+        "gstlal": {
+          "far": {
+            "value": 0.18,
+            "upper_limit": false,
+            "unit": "1/yr"
+          },
+          "network_snr": 10.8
+        },
+        "cwb": {
+          "far": {
+            "value": 0.02,
+            "upper_limit": false,
+            "unit": "1/yr"
+          },
+          "network_snr": 10.2
+        }
+      },
+      "p_astro": {
+        "gstlal": {
+          "terrestrial": 0.018,
+          "bns": 0,
+          "nsbh": 0,
+          "bbh": 0.98,
+          "astrophysical": 0.98
+        },
+        "pycbc": {
+          "terrestrial": 0.48,
+          "bbh": 0.52,
+          "astrophysical": 0.52
+        },
+        "cwb": {
+          "terrestrial": 0.057,
+          "bbh": 0.94
+        }
+      },
+      "pe_flow_hz": {
+        "all": 20.0
+      },
+      "source_parameters": {
+        "m1_source_msun": {
+          "median": 50.2,
+          "plus": 16.2,
+          "minus": 10.2
+        },
+        "m2_source_msun": {
+          "median": 34.0,
+          "plus": 9.1,
+          "minus": 10.1
+        },
+        "chirp_mass_source_msun": {
+          "median": 35.4,
+          "plus": 6.5,
+          "minus": 4.8
+        },
+        "chi_eff": {
+          "median": 0.37,
+          "plus": 0.21,
+          "minus": 0.25
+        },
+        "final_mass_source_msun": {
+          "median": 79.5,
+          "plus": 14.7,
+          "minus": 10.2
+        },
+        "final_spin": {
+          "median": 0.81,
+          "plus": 0.07,
+          "minus": 0.13
+        },
+        "e_rad_msun_c2": {
+          "median": 4.8,
+          "plus": 1.7,
+          "minus": 1.7
+        },
+        "l_peak_1e56_erg_per_s": {
+          "median": 4.2,
+          "plus": 0.9,
+          "minus": 1.5
+        },
+        "luminosity_distance_mpc": {
+          "median": 2840,
+          "plus": 1400,
+          "minus": 1360
+        },
+        "redshift": {
+          "median": 0.49,
+          "plus": 0.19,
+          "minus": 0.21
+        },
+        "sky_area_90pct_deg2": 1041
+      }
+    },
+    {
+      "name": "GW170809",
+      "date_utc": "2017-08-09",
+      "time_utc": "08:28:21.8",
+      "source_type": "BBH",
+      "first_reported_in": "GWTC-1",
+      "searches": {
+        "pycbc": {
+          "far": {
+            "value": 0.000145,
+            "upper_limit": false,
+            "unit": "1/yr"
+          },
+          "network_snr": 12.2
+        },
+        "gstlal": {
+          "far": {
+            "value": 1e-07,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 12.4
+        },
+        "cwb": {
+          "far": null,
+          "network_snr": null
+        }
+      },
+      "p_astro": {
+        "gstlal": {
+          "terrestrial": 0,
+          "bns": 0,
+          "nsbh": 0.0064,
+          "bbh": 0.99,
+          "astrophysical": 1
+        },
+        "pycbc": {
+          "terrestrial": 0,
+          "bbh": 1,
+          "astrophysical": 1
+        },
+        "cwb": null
+      },
+      "pe_flow_hz": {
+        "all": 20.0
+      },
+      "source_parameters": {
+        "m1_source_msun": {
+          "median": 35.0,
+          "plus": 8.3,
+          "minus": 5.9
+        },
+        "m2_source_msun": {
+          "median": 23.8,
+          "plus": 5.1,
+          "minus": 5.2
+        },
+        "chirp_mass_source_msun": {
+          "median": 24.9,
+          "plus": 2.1,
+          "minus": 1.7
+        },
+        "chi_eff": {
+          "median": 0.08,
+          "plus": 0.17,
+          "minus": 0.17
+        },
+        "final_mass_source_msun": {
+          "median": 56.3,
+          "plus": 5.2,
+          "minus": 3.8
+        },
+        "final_spin": {
+          "median": 0.7,
+          "plus": 0.08,
+          "minus": 0.09
+        },
+        "e_rad_msun_c2": {
+          "median": 2.7,
+          "plus": 0.6,
+          "minus": 0.6
+        },
+        "l_peak_1e56_erg_per_s": {
+          "median": 3.5,
+          "plus": 0.6,
+          "minus": 0.9
+        },
+        "luminosity_distance_mpc": {
+          "median": 1030,
+          "plus": 320,
+          "minus": 390
+        },
+        "redshift": {
+          "median": 0.2,
+          "plus": 0.05,
+          "minus": 0.07
+        },
+        "sky_area_90pct_deg2": 308
+      }
+    },
+    {
+      "name": "GW170814",
+      "date_utc": "2017-08-14",
+      "time_utc": "10:30:43.5",
+      "source_type": "BBH",
+      "first_reported_in": "individual detection paper",
+      "searches": {
+        "pycbc": {
+          "far": {
+            "value": 1.25e-05,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 16.3
+        },
+        "gstlal": {
+          "far": {
+            "value": 1e-07,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 15.9
+        },
+        "cwb": {
+          "far": {
+            "value": 0.000208,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 17.2
+        }
+      },
+      "p_astro": {
+        "gstlal": {
+          "terrestrial": 0,
+          "bns": 0,
+          "nsbh": 0.0024,
+          "bbh": 1,
+          "astrophysical": 1
+        },
+        "pycbc": {
+          "terrestrial": 0,
+          "bbh": 1,
+          "astrophysical": 1
+        },
+        "cwb": {
+          "terrestrial": 0,
+          "bbh": 1
+        }
+      },
+      "pe_flow_hz": {
+        "all": 20.0
+      },
+      "source_parameters": {
+        "m1_source_msun": {
+          "median": 30.6,
+          "plus": 5.6,
+          "minus": 3.0
+        },
+        "m2_source_msun": {
+          "median": 25.2,
+          "plus": 2.8,
+          "minus": 4.0
+        },
+        "chirp_mass_source_msun": {
+          "median": 24.1,
+          "plus": 1.4,
+          "minus": 1.1
+        },
+        "chi_eff": {
+          "median": 0.07,
+          "plus": 0.12,
+          "minus": 0.12
+        },
+        "final_mass_source_msun": {
+          "median": 53.2,
+          "plus": 3.2,
+          "minus": 2.4
+        },
+        "final_spin": {
+          "median": 0.72,
+          "plus": 0.07,
+          "minus": 0.05
+        },
+        "e_rad_msun_c2": {
+          "median": 2.7,
+          "plus": 0.4,
+          "minus": 0.3
+        },
+        "l_peak_1e56_erg_per_s": {
+          "median": 3.7,
+          "plus": 0.4,
+          "minus": 0.5
+        },
+        "luminosity_distance_mpc": {
+          "median": 600,
+          "plus": 150,
+          "minus": 220
+        },
+        "redshift": {
+          "median": 0.12,
+          "plus": 0.03,
+          "minus": 0.04
+        },
+        "sky_area_90pct_deg2": 87
+      }
+    },
+    {
+      "name": "GW170817",
+      "date_utc": "2017-08-17",
+      "time_utc": "12:41:04.4",
+      "source_type": "BNS",
+      "first_reported_in": "individual detection paper",
+      "searches": {
+        "pycbc": {
+          "far": {
+            "value": 1.25e-05,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 30.9
+        },
+        "gstlal": {
+          "far": {
+            "value": 1e-07,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 33.0
+        },
+        "cwb": {
+          "far": null,
+          "network_snr": null
+        }
+      },
+      "p_astro": {
+        "gstlal": {
+          "terrestrial": 0,
+          "bns": 1,
+          "nsbh": 0,
+          "bbh": 0,
+          "astrophysical": 1
+        },
+        "pycbc": {
+          "terrestrial": 0,
+          "bns": 1,
+          "astrophysical": 1
+        },
+        "cwb": null
+      },
+      "pe_flow_hz": {
+        "all": 23.0
+      },
+      "source_parameters": {
+        "m1_source_msun": {
+          "median": 1.46,
+          "plus": 0.12,
+          "minus": 0.1
+        },
+        "m2_source_msun": {
+          "median": 1.27,
+          "plus": 0.09,
+          "minus": 0.09
+        },
+        "chirp_mass_source_msun": {
+          "median": 1.186,
+          "plus": 0.001,
+          "minus": 0.001
+        },
+        "chi_eff": {
+          "median": 0.0,
+          "plus": 0.02,
+          "minus": 0.01
+        },
+        "final_mass_source_msun": {
+          "bound": "upper",
+          "value": 2.8
+        },
+        "final_spin": {
+          "bound": "upper",
+          "value": 0.89
+        },
+        "e_rad_msun_c2": {
+          "bound": "lower",
+          "value": 0.04
+        },
+        "l_peak_1e56_erg_per_s": {
+          "bound": "lower",
+          "value": 0.1
+        },
+        "luminosity_distance_mpc": {
+          "median": 40,
+          "plus": 7,
+          "minus": 15
+        },
+        "redshift": {
+          "median": 0.01,
+          "plus": 0.0,
+          "minus": 0.0
+        },
+        "sky_area_90pct_deg2": 16
+      }
+    },
+    {
+      "name": "GW170818",
+      "date_utc": "2017-08-18",
+      "time_utc": "02:25:09.1",
+      "source_type": "BBH",
+      "first_reported_in": "GWTC-1",
+      "searches": {
+        "pycbc": {
+          "far": null,
+          "network_snr": null
+        },
+        "gstlal": {
+          "far": {
+            "value": 4.2e-05,
+            "upper_limit": false,
+            "unit": "1/yr"
+          },
+          "network_snr": 11.3
+        },
+        "cwb": {
+          "far": null,
+          "network_snr": null
+        }
+      },
+      "p_astro": {
+        "gstlal": {
+          "terrestrial": 0,
+          "bns": 0,
+          "nsbh": 0.0053,
+          "bbh": 0.99,
+          "astrophysical": 1
+        },
+        "pycbc": null,
+        "cwb": null
+      },
+      "pe_flow_hz": {
+        "all": 16.0
+      },
+      "source_parameters": {
+        "m1_source_msun": {
+          "median": 35.4,
+          "plus": 7.5,
+          "minus": 4.7
+        },
+        "m2_source_msun": {
+          "median": 26.7,
+          "plus": 4.3,
+          "minus": 5.2
+        },
+        "chirp_mass_source_msun": {
+          "median": 26.5,
+          "plus": 2.1,
+          "minus": 1.7
+        },
+        "chi_eff": {
+          "median": -0.09,
+          "plus": 0.18,
+          "minus": 0.21
+        },
+        "final_mass_source_msun": {
+          "median": 59.4,
+          "plus": 4.9,
+          "minus": 3.8
+        },
+        "final_spin": {
+          "median": 0.67,
+          "plus": 0.07,
+          "minus": 0.08
+        },
+        "e_rad_msun_c2": {
+          "median": 2.7,
+          "plus": 0.5,
+          "minus": 0.5
+        },
+        "l_peak_1e56_erg_per_s": {
+          "median": 3.4,
+          "plus": 0.5,
+          "minus": 0.7
+        },
+        "luminosity_distance_mpc": {
+          "median": 1060,
+          "plus": 420,
+          "minus": 380
+        },
+        "redshift": {
+          "median": 0.21,
+          "plus": 0.07,
+          "minus": 0.07
+        },
+        "sky_area_90pct_deg2": 39
+      }
+    },
+    {
+      "name": "GW170823",
+      "date_utc": "2017-08-23",
+      "time_utc": "13:13:58.5",
+      "source_type": "BBH",
+      "first_reported_in": "GWTC-1",
+      "searches": {
+        "pycbc": {
+          "far": {
+            "value": 3.29e-05,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 11.1
+        },
+        "gstlal": {
+          "far": {
+            "value": 1e-07,
+            "upper_limit": true,
+            "unit": "1/yr"
+          },
+          "network_snr": 11.5
+        },
+        "cwb": {
+          "far": {
+            "value": 0.00214,
+            "upper_limit": false,
+            "unit": "1/yr"
+          },
+          "network_snr": 10.8
+        }
+      },
+      "p_astro": {
+        "gstlal": {
+          "terrestrial": 0,
+          "bns": 0,
+          "nsbh": 0.0059,
+          "bbh": 0.99,
+          "astrophysical": 1
+        },
+        "pycbc": {
+          "terrestrial": 0,
+          "bbh": 1,
+          "astrophysical": 1
+        },
+        "cwb": {
+          "terrestrial": 0.0043,
+          "bbh": 1
+        }
+      },
+      "pe_flow_hz": {
+        "all": 20.0
+      },
+      "source_parameters": {
+        "m1_source_msun": {
+          "median": 39.5,
+          "plus": 11.2,
+          "minus": 6.7
+        },
+        "m2_source_msun": {
+          "median": 29.0,
+          "plus": 6.7,
+          "minus": 7.8
+        },
+        "chirp_mass_source_msun": {
+          "median": 29.2,
+          "plus": 4.6,
+          "minus": 3.6
+        },
+        "chi_eff": {
+          "median": 0.09,
+          "plus": 0.22,
+          "minus": 0.26
+        },
+        "final_mass_source_msun": {
+          "median": 65.4,
+          "plus": 10.1,
+          "minus": 7.4
+        },
+        "final_spin": {
+          "median": 0.72,
+          "plus": 0.09,
+          "minus": 0.12
+        },
+        "e_rad_msun_c2": {
+          "median": 3.3,
+          "plus": 1.0,
+          "minus": 0.9
+        },
+        "l_peak_1e56_erg_per_s": {
+          "median": 3.6,
+          "plus": 0.7,
+          "minus": 1.1
+        },
+        "luminosity_distance_mpc": {
+          "median": 1940,
+          "plus": 970,
+          "minus": 900
+        },
+        "redshift": {
+          "median": 0.35,
+          "plus": 0.15,
+          "minus": 0.15
+        },
+        "sky_area_90pct_deg2": 1666
+      }
+    }
+  ],
+  "marginal_triggers": [
+    {
+      "label": "151008",
+      "time_utc": "14:09:17.5",
+      "search": "PyCBC",
+      "far_per_yr": 10.17,
+      "network_snr": 8.8,
+      "chirp_mass_detector_msun": 5.12,
+      "data_quality": "No artifacts"
+    },
+    {
+      "label": "151012.2",
+      "time_utc": "06:30:45.2",
+      "search": "GstLAL",
+      "far_per_yr": 8.56,
+      "network_snr": 9.6,
+      "chirp_mass_detector_msun": 2.01,
+      "data_quality": "Artifacts present"
+    },
+    {
+      "label": "151116",
+      "time_utc": "22:41:48.7",
+      "search": "PyCBC",
+      "far_per_yr": 4.77,
+      "network_snr": 9.0,
+      "chirp_mass_detector_msun": 1.24,
+      "data_quality": "No artifacts"
+    },
+    {
+      "label": "161202",
+      "time_utc": "03:53:44.9",
+      "search": "GstLAL",
+      "far_per_yr": 6.0,
+      "network_snr": 10.5,
+      "chirp_mass_detector_msun": 1.54,
+      "data_quality": "Artifacts possibly caused"
+    },
+    {
+      "label": "161217",
+      "time_utc": "07:16:24.4",
+      "search": "GstLAL",
+      "far_per_yr": 10.12,
+      "network_snr": 10.7,
+      "chirp_mass_detector_msun": 7.86,
+      "data_quality": "Artifacts possibly caused"
+    },
+    {
+      "label": "170208",
+      "time_utc": "10:39:25.8",
+      "search": "GstLAL",
+      "far_per_yr": 11.18,
+      "network_snr": 10.0,
+      "chirp_mass_detector_msun": 7.39,
+      "data_quality": "Artifacts present"
+    },
+    {
+      "label": "170219",
+      "time_utc": "14:04:09.0",
+      "search": "GstLAL",
+      "far_per_yr": 6.26,
+      "network_snr": 9.6,
+      "chirp_mass_detector_msun": 1.53,
+      "data_quality": "No artifacts"
+    },
+    {
+      "label": "170405",
+      "time_utc": "11:04:52.7",
+      "search": "GstLAL",
+      "far_per_yr": 4.55,
+      "network_snr": 9.3,
+      "chirp_mass_detector_msun": 1.44,
+      "data_quality": "Artifacts present"
+    },
+    {
+      "label": "170412",
+      "time_utc": "15:56:39.0",
+      "search": "GstLAL",
+      "far_per_yr": 8.22,
+      "network_snr": 9.7,
+      "chirp_mass_detector_msun": 4.36,
+      "data_quality": "Artifacts possibly caused"
+    },
+    {
+      "label": "170423",
+      "time_utc": "12:10:45.0",
+      "search": "GstLAL",
+      "far_per_yr": 6.47,
+      "network_snr": 8.9,
+      "chirp_mass_detector_msun": 1.17,
+      "data_quality": "No artifacts"
+    },
+    {
+      "label": "170616",
+      "time_utc": "19:47:20.8",
+      "search": "PyCBC",
+      "far_per_yr": 1.94,
+      "network_snr": 9.1,
+      "chirp_mass_detector_msun": 2.75,
+      "data_quality": "Artifacts present"
+    },
+    {
+      "label": "170630",
+      "time_utc": "16:17:07.8",
+      "search": "GstLAL",
+      "far_per_yr": 10.46,
+      "network_snr": 9.7,
+      "chirp_mass_detector_msun": 0.9,
+      "data_quality": "Artifacts present"
+    },
+    {
+      "label": "170705",
+      "time_utc": "08:45:16.3",
+      "search": "GstLAL",
+      "far_per_yr": 10.97,
+      "network_snr": 9.3,
+      "chirp_mass_detector_msun": 3.4,
+      "data_quality": "No artifacts"
+    },
+    {
+      "label": "170720",
+      "time_utc": "22:44:31.8",
+      "search": "GstLAL",
+      "far_per_yr": 10.75,
+      "network_snr": 13.0,
+      "chirp_mass_detector_msun": 5.96,
+      "data_quality": "Artifacts possibly caused"
+    }
+  ],
+  "gw150914_as_published_2016": {
+    "note": "superseded by GWTC-1; retained for comparison",
+    "reference": "Phys. Rev. Lett. 116, 061102 (2016), Table I and text",
+    "m1_source_msun": {
+      "median": 36,
+      "plus": 5,
+      "minus": 4
+    },
+    "m2_source_msun": {
+      "median": 29,
+      "plus": 4,
+      "minus": 4
+    },
+    "final_mass_source_msun": {
+      "median": 62,
+      "plus": 4,
+      "minus": 4
+    },
+    "final_spin": {
+      "median": 0.67,
+      "plus": 0.05,
+      "minus": 0.07
+    },
+    "luminosity_distance_mpc": {
+      "median": 410,
+      "plus": 160,
+      "minus": 180
+    },
+    "redshift": {
+      "median": 0.09,
+      "plus": 0.03,
+      "minus": 0.04
+    },
+    "e_rad_msun_c2": {
+      "median": 3.0,
+      "plus": 0.5,
+      "minus": 0.5
+    },
+    "l_peak_erg_per_s": {
+      "median": 3.6e+56,
+      "plus": 5e+55,
+      "minus": 4e+55
+    },
+    "l_peak_msun_c2_per_s": {
+      "median": 200,
+      "plus": 30,
+      "minus": 20
+    },
+    "combined_network_snr": 24,
+    "pycbc_rho_c": 23.6,
+    "cwb_eta_c": 20.0,
+    "far_cbc": "< 1 per 203000 yr",
+    "significance_cbc_sigma": 5.1,
+    "far_burst_c3": "< 1 per 22500 yr",
+    "significance_burst_sigma": 4.6,
+    "far_burst_c2c3": "1 per 8400 yr",
+    "significance_burst_c2c3_sigma": 4.4,
+    "arrival_delay_l1_to_h1_ms": {
+      "median": 6.9,
+      "plus": 0.5,
+      "minus": 0.4
+    },
+    "sky_area_90pct_deg2": 600,
+    "peak_strain": 1e-21,
+    "frequency_sweep_hz": [
+      35,
+      250
+    ],
+    "primary_spin_constraint": "< 0.7 (90% credible)",
+    "second_most_significant_event": {
+      "far_per_yr": "1 per 2.3 yr",
+      "false_alarm_probability": 0.02
+    }
+  },
+  "gwtc1_revisions_vs_earlier_papers": {
+    "reference": "GWTC-1 Sec. V F",
+    "total_mass_median_shift_msun": {
+      "GW150914": 1.0,
+      "GW170104": 0.3,
+      "GW151012": 0.2,
+      "GW151226": -0.3,
+      "GW170608": -0.2
+    },
+    "cause": "improved BayesWave PSD estimation, frequency-dependent spline calibration envelopes, and (for O2) noise subtraction",
+    "GW170104_pe_snr": {
+      "before": {
+        "median": 13.3,
+        "plus": 0.2,
+        "minus": 0.3
+      },
+      "after": {
+        "median": 14.0,
+        "plus": 0.2,
+        "minus": 0.3
+      }
+    },
+    "GW170104_chi_eff": {
+      "before": {
+        "median": -0.12,
+        "plus": 0.21,
+        "minus": 0.3
+      },
+      "after": {
+        "median": -0.04,
+        "plus": 0.17,
+        "minus": 0.21
+      }
+    },
+    "GW151226_chi_eff": {
+      "fully_precessing_SEOBNRv3": {
+        "median": 0.15,
+        "plus": 0.25,
+        "minus": 0.11
+      },
+      "effective_precession_IMRPhenomPv2": {
+        "median": 0.2,
+        "plus": 0.18,
+        "minus": 0.08
+      },
+      "min_spin_magnitude_99pct": 0.28,
+      "o1_value": 0.2
+    },
+    "GW170817_lambda_tilde": {
+      "published": {
+        "median": 300,
+        "plus": 420,
+        "minus": 230
+      },
+      "gwtc1_IMRPhenomPv2NRT": {
+        "median": 330,
+        "plus": 438,
+        "minus": 251
+      },
+      "SEOBNRv4NRT": {
+        "median": 305,
+        "plus": 432,
+        "minus": 241
+      },
+      "TaylorF2": {
+        "median": 394,
+        "plus": 557,
+        "minus": 321
+      },
+      "SEOBNRv4T": {
+        "median": 349,
+        "plus": 394,
+        "minus": 349
+      },
+      "TEOBResumS": {
+        "median": 405,
+        "plus": 545,
+        "minus": 375
+      },
+      "note": "90% highest-posterior-density interval, low-spin prior"
+    }
+  },
+  "population": {
+    "n_bbh": 10,
+    "n_bns": 1,
+    "n_nsbh": 0,
+    "n_marginal": 14,
+    "detection_cadence": "~1 per 15 days of searched data",
+    "bbh_total_mass_range_msun": {
+      "min": {
+        "median": 18.6,
+        "plus": 3.2,
+        "minus": 0.7
+      },
+      "max": {
+        "median": 84.4,
+        "plus": 15.8,
+        "minus": 11.1
+      }
+    },
+    "bbh_distance_range_mpc": {
+      "min": {
+        "median": 320,
+        "plus": 120,
+        "minus": 110
+      },
+      "max": {
+        "median": 2840,
+        "plus": 1400,
+        "minus": 1360
+      }
+    },
+    "merger_rates_gpc3_yr": {
+      "BNS": {
+        "interval_90pct": [
+          110,
+          3840
+        ]
+      },
+      "BBH": {
+        "interval_90pct": [
+          9.7,
+          101
+        ]
+      },
+      "NSBH": {
+        "upper_limit_90pct": 610
+      }
+    },
+    "primary_mass_power_law_index_alpha": {
+      "median": 1.3,
+      "plus": 1.4,
+      "minus": 1.7
+    }
+  },
+  "coverage_gap": "These four papers cover O1 and O2 only. For events after GW170823 use GWTC-2, GWTC-2.1 and GWTC-3."
+}

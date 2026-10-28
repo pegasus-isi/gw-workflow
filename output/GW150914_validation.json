@@ -1,0 +1,128 @@
+{
+  "event": "GW150914",
+  "tier": "A",
+  "tolerances": {
+    "snr_low": -0.15,
+    "snr_high": 0.25,
+    "mc_frac": 0.1,
+    "time_ms": 100.0
+  },
+  "reference_source": "GWTC-1 (Abbott 2019, PRX 9, 031040), Tables I and III",
+  "criteria": [
+    {
+      "criterion": "V1a coincidence with network SNR >= 8",
+      "pass": true,
+      "required": true,
+      "recovered": 23.6942,
+      "reference": ">= 8.0",
+      "tolerance": ">= 8.0"
+    },
+    {
+      "criterion": "V1b network SNR within band",
+      "pass": true,
+      "required": true,
+      "recovered": 23.6942,
+      "reference": 23.6,
+      "tolerance": "[20.06, 29.50] (-15%/+25%)",
+      "note": "margin +0.4%; exceeding the reference is not a failure -- GWTC-1's value is the highest-RANKED template, not the highest-SNR one"
+    },
+    {
+      "criterion": "V1c single-detector SNR >= 5.5 somewhere",
+      "pass": true,
+      "required": true,
+      "recovered": {
+        "H1": 19.5476,
+        "L1": 13.3905
+      },
+      "reference": ">= 5.5",
+      "tolerance": ">= 5.5"
+    },
+    {
+      "criterion": "V2a/V2b chirp mass (detector frame)",
+      "pass": true,
+      "required": true,
+      "recovered": 31.57544,
+      "reference": {
+        "detector_frame_median": 31.174,
+        "detector_frame_90pct": [
+          28.726,
+          33.936
+        ],
+        "source_frame_published": {
+          "median": 28.6,
+          "plus": 1.7,
+          "minus": 1.5
+        },
+        "redshift_published": {
+          "median": 0.09,
+          "plus": 0.03,
+          "minus": 0.03
+        }
+      },
+      "tolerance": "inside the propagated interval, or within 10% of the median",
+      "note": "inside 90% interval: True; fractional offset from median +1.29%. Frame conversion applied (SPEC.md \u00a76.2): (1+z) = 1.090"
+    },
+    {
+      "criterion": "V2c recovered value not at a bank edge",
+      "pass": true,
+      "required": true,
+      "recovered": 31.57544,
+      "reference": {
+        "bank_mc_range": [
+          5.0,
+          59.94094156401742
+        ]
+      },
+      "tolerance": "not within 0.1% of either edge",
+      "note": "catches a rail-pinned fit masquerading as a measurement"
+    },
+    {
+      "criterion": "V2d bank spacing finer than the claimed tolerance",
+      "pass": true,
+      "required": true,
+      "recovered": 0.00436,
+      "reference": "< 0.1",
+      "tolerance": "< 0.1",
+      "note": "prevents claiming an agreement the bank's own resolution cannot support"
+    },
+    {
+      "criterion": "V3a merger time vs published event time",
+      "pass": true,
+      "required": true,
+      "recovered": 21.0,
+      "reference": {
+        "event_gps_from_gwosc_api": 1126259462.4,
+        "published_utc": "2015-09-14 09:50:45.4"
+      },
+      "tolerance": "<= 100.0 ms",
+      "note": "compared in GPS against the API value for the published UTC, so no leap-second conversion is involved"
+    },
+    {
+      "criterion": "V3b |dt| <= inter-site light travel",
+      "pass": true,
+      "required": true,
+      "recovered": 7.324,
+      "reference": "<= 10.0 ms",
+      "tolerance": "<= 10.0 ms",
+      "note": "internal consistency check; needs no published value"
+    },
+    {
+      "criterion": "V3c GW150914 arrival order and delay",
+      "pass": true,
+      "required": true,
+      "recovered": {
+        "first_arrival": "L1",
+        "delay_ms": 7.324
+      },
+      "reference": {
+        "expected_first": "L1",
+        "delay_ms": "6.9 +0.5 -0.4"
+      },
+      "tolerance": "L1 first, delay within the published interval (+/-1 ms allowance)",
+      "note": "PRL 116 061102 -- the only published per-event delay"
+    }
+  ],
+  "failures": [],
+  "verdict": "PASS",
+  "waveform_fallback_used": false
+}

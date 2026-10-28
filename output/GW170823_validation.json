@@ -1,0 +1,113 @@
+{
+  "event": "GW170823",
+  "tier": "A",
+  "tolerances": {
+    "snr_low": -0.15,
+    "snr_high": 0.25,
+    "mc_frac": 0.1,
+    "time_ms": 100.0
+  },
+  "reference_source": "GWTC-1 (Abbott 2019, PRX 9, 031040), Tables I and III",
+  "criteria": [
+    {
+      "criterion": "V1a coincidence with network SNR >= 8",
+      "pass": true,
+      "required": true,
+      "recovered": 11.5105,
+      "reference": ">= 8.0",
+      "tolerance": ">= 8.0"
+    },
+    {
+      "criterion": "V1b network SNR within band",
+      "pass": true,
+      "required": true,
+      "recovered": 11.5105,
+      "reference": 11.1,
+      "tolerance": "[9.43, 13.88] (-15%/+25%)",
+      "note": "margin +3.7%; exceeding the reference is not a failure -- GWTC-1's value is the highest-RANKED template, not the highest-SNR one"
+    },
+    {
+      "criterion": "V1c single-detector SNR >= 5.5 somewhere",
+      "pass": true,
+      "required": true,
+      "recovered": {
+        "H1": 6.3648,
+        "L1": 9.5907
+      },
+      "reference": ">= 5.5",
+      "tolerance": ">= 5.5"
+    },
+    {
+      "criterion": "V2a/V2b chirp mass (detector frame)",
+      "pass": true,
+      "required": true,
+      "recovered": 38.92656,
+      "reference": {
+        "detector_frame_median": 39.42,
+        "detector_frame_90pct": [
+          30.72,
+          50.7
+        ],
+        "source_frame_published": {
+          "median": 29.2,
+          "plus": 4.6,
+          "minus": 3.6
+        },
+        "redshift_published": {
+          "median": 0.35,
+          "plus": 0.15,
+          "minus": 0.15
+        }
+      },
+      "tolerance": "inside the propagated interval, or within 10% of the median",
+      "note": "inside 90% interval: True; fractional offset from median +1.25%. Frame conversion applied (SPEC.md \u00a76.2): (1+z) = 1.350"
+    },
+    {
+      "criterion": "V2c recovered value not at a bank edge",
+      "pass": true,
+      "required": true,
+      "recovered": 38.92656,
+      "reference": {
+        "bank_mc_range": [
+          5.0,
+          59.94094156401742
+        ]
+      },
+      "tolerance": "not within 0.1% of either edge",
+      "note": "catches a rail-pinned fit masquerading as a measurement"
+    },
+    {
+      "criterion": "V2d bank spacing finer than the claimed tolerance",
+      "pass": true,
+      "required": true,
+      "recovered": 0.00893,
+      "reference": "< 0.1",
+      "tolerance": "< 0.1",
+      "note": "prevents claiming an agreement the bank's own resolution cannot support"
+    },
+    {
+      "criterion": "V3a merger time vs published event time",
+      "pass": true,
+      "required": true,
+      "recovered": 16.11,
+      "reference": {
+        "event_gps_from_gwosc_api": 1187529256.5,
+        "published_utc": "2017-08-23 13:13:58.5"
+      },
+      "tolerance": "<= 100.0 ms",
+      "note": "compared in GPS against the API value for the published UTC, so no leap-second conversion is involved"
+    },
+    {
+      "criterion": "V3b |dt| <= inter-site light travel",
+      "pass": true,
+      "required": true,
+      "recovered": 0.977,
+      "reference": "<= 10.0 ms",
+      "tolerance": "<= 10.0 ms",
+      "note": "internal consistency check; needs no published value"
+    }
+  ],
+  "failures": [],
+  "verdict": "PASS",
+  "waveform_fallback_used": false
+}

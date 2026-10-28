@@ -1,0 +1,24 @@
+# local tool and editor settings
+.claude/
+.idea/
+.vscode/
+.DS_Store
+.venv/
+__pycache__/
+*.pyc
+
+# container images (build from Apptainer/*.def)
+*.sif
+pydeps.tar.gz
+
+# Pegasus runtime state (submit host)
+scratch/
+runs/
+submit/
+workflow.yml
+braindump.yml
+pegasus.properties
+*.log
+
+# Published papers (publisher PDFs, not redistributed); see references/README.md
+references/*.pdf

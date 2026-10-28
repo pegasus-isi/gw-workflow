@@ -1,0 +1,46 @@
+{
+  "event": "GW150914",
+  "detector": "L1",
+  "event_gps": 1126259462.4,
+  "requested_analysis_length_s": 256.0,
+  "checks": {
+    "science_mode_fraction": 1.0,
+    "n_clean_runs": 1,
+    "clean_runs": [
+      {
+        "start": 1126257415.0,
+        "end": 1126261511.0,
+        "length_s": 4096.0
+      }
+    ],
+    "event_clean_run": {
+      "start": 1126257415.0,
+      "end": 1126261511.0,
+      "length_s": 4096.0,
+      "event_offset_from_start_s": 2047.4,
+      "event_offset_from_end_s": 2048.6
+    },
+    "injection_bits": {
+      "NO_CBC_HW_INJ": 1.0,
+      "NO_BURST_HW_INJ": 1.0,
+      "NO_DETCHAR_HW_INJ": 1.0,
+      "NO_CW_HW_INJ": 0.0,
+      "NO_STOCH_HW_INJ": 1.0
+    },
+    "nan_samples_in_span": 0,
+    "span_samples": 1048576
+  },
+  "failures": [],
+  "pass": true,
+  "caveat": "SPEC.md D7: passing every data-quality flag does not imply the span is free of transient artifacts.",
+  "file_gps_start": 1126257415.0,
+  "file_sample_rate": 4096,
+  "channel": "L1",
+  "analysis_span": [
+    1126259334.4,
+    1126259590.4
+  ],
+  "analysis_length_s": 256.0,
+  "analysis_shifted": false,
+  "analysis_truncated": false
+}

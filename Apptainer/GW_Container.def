@@ -1,0 +1,128 @@
+# Container for gw-workflow — GWTC-1 BBH reproduction from GWOSC open data.
+#
+# Base is ubuntu:24.04 to match the build host (glibc 2.39). A base OLDER than
+# the host gets handed the host's libfakeroot.so during %post and dies with
+# "version `GLIBC_2.38' not found" before a single %post command runs — nothing
+# in the definition is at fault and nothing in the log points at the base image.
+#
+# Build (unprivileged, as Studio's Build Image button does):
+#   apptainer build --ignore-fakeroot-command GW_Container.sif Apptainer/GW_Container.def
+#
+# Never use --fakeroot: it produces an empty container while reporting success.
+# Verify any hand build with `apptainer inspect GW_Container.sif` before
+# referencing it from the transformation catalog.
+
+Bootstrap: docker
+From: ubuntu:24.04
+
+%labels
+    Name        GW_Container
+    Workflow    gw-workflow
+    Description GWTC-1 BBH reproduction from GWOSC open data
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+
+    # Unprivileged builds emulate root, and apt then fails to drop privileges to
+    # the _apt user ("setgroups: Operation not permitted"), so every download
+    # errors. Keeping apt as root avoids the drop entirely.
+    printf 'APT::Sandbox::User "root";\n' > /etc/apt/apt.conf.d/00-no-sandbox
+
+    apt-get update && \
+        apt-get install -y --no-install-recommends \
+            python3 python3-pip python3-dev \
+            build-essential pkg-config \
+            libhdf5-dev \
+            wget curl ca-certificates git
+    rm -rf /var/lib/apt/lists/*
+
+    # Ubuntu 24.04 marks the system Python externally managed (PEP 668). Inside a
+    # single-purpose container there is no environment to protect, so install
+    # directly rather than carrying a venv.
+    PIP="pip3 install --no-cache-dir --break-system-packages"
+
+    # Core stack — every wrapper needs these.
+    $PIP \
+        "numpy>=1.26,<3" \
+        "scipy>=1.11" \
+        "h5py>=3.10" \
+        "matplotlib>=3.8" \
+        "requests>=2.31"
+
+    # Waveform models (SPEC.md M2). PyCBC pulls LALSuite.
+    #
+    # The workflow's default approximant is IMRPhenomD, NOT SEOBNRv4_ROM.
+    # SEOBNRv4_ROM is what the GWTC-1 PyCBC bank used above 4 Msun and stays
+    # selectable via --approximant, but LALSuite >= 7.25 resolves its
+    # interpolation grids from $LAL_DATA_PATH (SEOBNRv4ROM_v3.0.hdf5), and those
+    # ship in a separate multi-GB data release rather than the pip wheel:
+    #   https://git.ligo.org/waveforms/software/lalsuite-waveform-data
+    #   https://zenodo.org/records/14999310
+    # IMRPhenomD is fully analytic, needs no data files, and is a complete
+    # inspiral-merger-ringdown aligned-spin model -- appropriate for these
+    # masses. To enable SEOBNRv4_ROM, fetch that data into /opt/lal-data and set
+    # LAL_DATA_PATH below.
+    $PIP "pycbc>=2.3" || {
+        echo "ERROR: pycbc failed to install. Without it every result is" >&2
+        echo "marked INVALID_FALLBACK_WAVEFORM (SPEC.md M2)." >&2
+        exit 1
+    }
+
+    python3 -c "import numpy, scipy, h5py, matplotlib, requests; print('core OK')"
+    python3 -c "import pycbc, lal; print('pycbc', pycbc.__version__, 'lal', lal.__version__)"
+    python3 - <<'PYCHK'
+# Fail the build if the DEFAULT approximant is unusable -- that is the condition
+# that would silently degrade every template to the PN toy.
+import numpy as np
+from pycbc.waveform import get_fd_waveform
+
+hp, _ = get_fd_waveform(approximant="IMRPhenomD", mass1=38.6, mass2=33.3,
+                        spin1z=0.0, spin2z=0.0, delta_f=1.0 / 256,
+                        f_lower=20.0, f_final=512.0)
+arr = np.asarray(hp.data)
+assert np.count_nonzero(arr) > 1000, "IMRPhenomD produced an empty waveform"
+print("IMRPhenomD OK:", len(arr), "bins,", int(np.count_nonzero(arr)), "nonzero")
+
+# SEOBNRv4_ROM is optional: report, do not fail.
+try:
+    get_fd_waveform(approximant="SEOBNRv4_ROM", mass1=38.6, mass2=33.3,
+                    spin1z=0.0, spin2z=0.0, delta_f=1.0 / 256,
+                    f_lower=20.0, f_final=512.0)
+    print("SEOBNRv4_ROM OK (LAL waveform data present)")
+except Exception:
+    print("SEOBNRv4_ROM UNAVAILABLE (no LAL waveform data) -- expected; "
+          "the workflow defaults to IMRPhenomD")
+PYCHK
+
+    ln -sf /usr/bin/python3 /usr/bin/python
+
+%environment
+    # Unbuffered so Pegasus captures wrapper logs in real time.
+    export PYTHONUNBUFFERED=1
+    export MPLBACKEND=Agg
+    # $HOME is not writable in the container; keep matplotlib quiet and fast.
+    export MPLCONFIGDIR=/tmp/matplotlib-cache
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8
+    # Keep numeric libraries single-threaded: SPEC.md W3 gives each job one core,
+    # and an unpinned BLAS would oversubscribe the node four times over.
+    export OMP_NUM_THREADS=1
+    export OPENBLAS_NUM_THREADS=1
+    export MKL_NUM_THREADS=1
+    # Uncomment after fetching the LAL waveform data into /opt/lal-data to make
+    # SEOBNRv4_ROM available (see the %post notes above).
+    # export LAL_DATA_PATH=/opt/lal-data
+
+%runscript
+    exec /bin/bash "$@"
+
+%test
+    python3 -c "import numpy, scipy, h5py, matplotlib, requests; print('core OK')"
+    python3 -c "
+from pycbc.waveform import get_fd_waveform
+import numpy as np
+hp, _ = get_fd_waveform(approximant='IMRPhenomD', mass1=38.6, mass2=33.3,
+                        spin1z=0.0, spin2z=0.0, delta_f=1.0/256,
+                        f_lower=20.0, f_final=512.0)
+assert np.count_nonzero(np.asarray(hp.data)) > 1000
+print('IMRPhenomD OK')"

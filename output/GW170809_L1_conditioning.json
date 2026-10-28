@@ -1,0 +1,79 @@
+{
+  "event": "GW170809",
+  "detector": "L1",
+  "event_gps": 1186302519.8,
+  "sample_rate_in": 4096,
+  "sample_rate_out": 2048,
+  "decimation_q": 2,
+  "analysis": {
+    "gps_start": 1186302391.8,
+    "length_s": 256.0,
+    "requested_length_s": 256.0,
+    "shifted_off_centre": false,
+    "truncated": false,
+    "samples": 524288,
+    "gates_applied": 2,
+    "gate_sample_indices": [
+      1,
+      524287
+    ]
+  },
+  "psd": {
+    "gps_start": 1186300488.0,
+    "length_s": 1024.0,
+    "n_blocks": 127,
+    "block_s": 16.0,
+    "inverse_truncation_s": 16.0,
+    "truncation_inband_ratio": 0.99949
+  },
+  "offsource": {
+    "requested": 10,
+    "placed": 10,
+    "length_s": 256.0,
+    "exclusion_s": 200.0,
+    "gps_starts": [
+      1186300488.0,
+      1186300744.0,
+      1186301000.0,
+      1186301256.0,
+      1186301512.0,
+      1186301768.0,
+      1186302024.0,
+      1186302719.8,
+      1186302975.8,
+      1186303231.8
+    ],
+    "gates_per_span": [
+      2,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  "band_hz": [
+    20.0,
+    512.0
+  ],
+  "highpass_hz": 15.0,
+  "gate": {
+    "threshold_whitened": 50.0,
+    "tukey_alpha": 0.5,
+    "zero_s": 1.0,
+    "provenance": "Usman 2016 \u00a73.2 (window); threshold is a tuning choice recorded in SPEC.md \u00a79.3"
+  },
+  "nonfinite_samples_zeroed": 2105344,
+  "science_mode_fraction": 0.87451,
+  "clean_runs": [
+    {
+      "start": 1186300472.0,
+      "end": 1186304054.0,
+      "length_s": 3582.0
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "event": "GW170809",
+  "detectors": [
+    "H1",
+    "L1"
+  ],
+  "n_single_triggers": {
+    "H1": 583,
+    "L1": 474
+  },
+  "coincidence_window_ms": 15.0,
+  "final_cluster_window_s": 10.0,
+  "template_match": "exact (Usman \u00a73.5)",
+  "ranking_statistic": "quadrature sum of single-detector SNR (Usman eq. 16)",
+  "waveform_fallback_used": false,
+  "input_chunks_truncated": false,
+  "meta": {
+    "H1": {
+      "event_gps": 1186302519.8,
+      "segment_gps_start": 1186302391.8,
+      "snr_threshold": 5.5,
+      "band_hz": [
+        20.0,
+        512.0
+      ],
+      "n_templates_total": 3858
+    },
+    "L1": {
+      "event_gps": 1186302519.8,
+      "segment_gps_start": 1186302391.8,
+      "snr_threshold": 5.5,
+      "band_hz": [
+        20.0,
+        512.0
+      ],
+      "n_templates_total": 3858
+    }
+  },
+  "no_significance": "SPEC.md N1: false-alarm rate and significance are NOT computable from a single segment and are not reported.",
+  "candidates": [
+    {
+      "detectors": [
+        "H1",
+        "L1"
+      ],
+      "template_index": 632,
+      "chirp_mass_detector": 29.44580938017429,
+      "q": 1.0,
+      "mass1": 33.82435279656247,
+      "mass2": 33.82435279656247,
+      "snr": {
+        "H1": 6.365677405354168,
+        "L1": 10.706802160239437
+      },
+      "gps_time": {
+        "H1": 1186302519.7541015,
+        "L1": 1186302519.7453125
+      },
+      "dt_seconds": -0.0087890625,
+      "network_snr": 12.456221791841395
+    }
+  ],
+  "n_candidates": 1
+}

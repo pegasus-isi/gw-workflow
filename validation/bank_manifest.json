@@ -1,0 +1,56 @@
+{
+  "n_templates": 49,
+  "chirp_mass_detector_range": [
+    25.0,
+    38.95468823410252
+  ],
+  "requested_mc_range": [
+    25.0,
+    40.0
+  ],
+  "q_grid": [
+    1.0,
+    2.4495,
+    6.0
+  ],
+  "spins": "zero (SPEC.md M3, non-spinning bank)",
+  "approximant": "IMRPhenomD",
+  "waveform_fallback_used": false,
+  "minimal_match_requested": 0.97,
+  "minimal_match_measured_min": 0.96993,
+  "minimal_match_measured_median": 0.97,
+  "band_hz": [
+    20.0,
+    512.0
+  ],
+  "df_hz": 0.00390625,
+  "psd_sources": [
+    {
+      "file": "GW150914_H1_conditioned.hdf5",
+      "event": "GW150914",
+      "detector": "H1"
+    },
+    {
+      "file": "GW150914_L1_conditioned.hdf5",
+      "event": "GW150914",
+      "detector": "L1"
+    }
+  ],
+  "psd_average": "harmonic mean, Usman 2016 eq. (7)",
+  "truncated": false,
+  "adequacy_gate": {
+    "tolerance": 0.01,
+    "events": [
+      {
+        "event": "GW150914",
+        "mc_detector_expected": 31.174,
+        "nearest_template_mc": 31.2437,
+        "fractional_offset": 0.00224,
+        "within_tolerance": true,
+        "local_spacing_fractional": 0.00585
+      }
+    ],
+    "failures": [],
+    "pass": true
+  }
+}

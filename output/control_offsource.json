@@ -1,0 +1,64 @@
+{
+  "control": "offsource_null",
+  "criterion": "V5a",
+  "event": "GW150914",
+  "n_spans": 10,
+  "onsource_network_snr": 23.6942,
+  "loudest_offsource_network_snr": 0.0,
+  "spans": [
+    {
+      "file": "off_GW150914_s00_coincidence.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_GW150914_s01_coincidence.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_GW150914_s02_coincidence.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_GW150914_s03_coincidence.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_GW150914_s04_coincidence.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_GW150914_s05_coincidence.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_GW150914_s06_coincidence.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_GW150914_s07_coincidence.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_GW150914_s08_coincidence.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_GW150914_s09_coincidence.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    }
+  ],
+  "pass": true,
+  "hard_gate": true,
+  "separation": 23.6942,
+  "note": "SPEC.md \u00a76.6: a control failure is a hard fail. Off-source spans were filtered by the same matched_filter.py code path with --dataset, then the same coincidence.py."
+}

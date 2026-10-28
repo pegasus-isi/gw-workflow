@@ -1,0 +1,39 @@
+{
+  "control": "offsource_null",
+  "criterion": "V5a",
+  "event": "GW150914",
+  "n_spans": 5,
+  "onsource_network_snr": 23.6136,
+  "loudest_offsource_network_snr": 0.0,
+  "spans": [
+    {
+      "file": "off_s00_coinc.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_s01_coinc.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_s02_coinc.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_s03_coinc.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    },
+    {
+      "file": "off_s04_coinc.json",
+      "loudest_network_snr": 0.0,
+      "n_candidates": 0
+    }
+  ],
+  "pass": true,
+  "hard_gate": true,
+  "separation": 23.6136,
+  "note": "SPEC.md \u00a76.6: a control failure is a hard fail. Off-source spans were filtered by the same matched_filter.py code path with --dataset, then the same coincidence.py."
+}
